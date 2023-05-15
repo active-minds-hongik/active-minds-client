@@ -1,11 +1,7 @@
 import React from 'react';
 
 const WrongQuestionsPage = () => {
-  return (
-    <div>
-      
-    </div>
-  );
+  return <div>WrongQuestionsPage</div>;
 };
 
 export default WrongQuestionsPage;
