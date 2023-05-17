@@ -12,37 +12,19 @@ const FaceGamePage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const questions = [
-    {
-      choice: [
-        { text: '보기1-1', isCorrect: true },
-        { text: '보기1-2', isCorrect: false },
-        { text: '보기1-3', isCorrect: false },
-        { text: '보기1-4', isCorrect: false },
-      ],
-    },
-    {
-      choice: [
-        { text: '보기2-1', isCorrect: false },
-        { text: '보기2-2', isCorrect: true },
-        { text: '보기2-3', isCorrect: false },
-        { text: '보기2-4', isCorrect: false },
-      ],
-    },
-    {
-      choice: [
-        { text: '보기3-1', isCorrect: false },
-        { text: '보기3-2', isCorrect: false },
-        { text: '보기3-3', isCorrect: true },
-        { text: '보기3-4', isCorrect: false },
-      ],
-    },
+    { choice: [{ url: '사진1', answer: '1' }] },
+    { choice: [{ url: '사진2', answer: '2' }] },
+    { choice: [{ url: '사진3', answer: '3' }] },
+    { choice: [{ url: '사진4', answer: '4' }] },
   ];
 
-  const handelNextButton = (isCorrect: boolean) => {
-    if (isCorrect) {
+  const handelAnswerButton = (e: React.MouseEvent<HTMLElement>) => {
+    if (
+      (e.target as HTMLElement).id ===
+      questions[currentQuestion].choice[0].answer
+    ) {
       setCurrentScore(currentScore + 1);
     }
-
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -58,23 +40,24 @@ const FaceGamePage = () => {
       <Current>
         {currentQuestion + 1} / {questions.length}
       </Current>
-      {/* 이미지 url 넣기 */}
-      <Img />
+      {questions[currentQuestion].choice.map((answer: any, index: number) => (
+        <Img>{answer.url}</Img>
+      ))}
+
       <ChoiceContainer>
-        {questions[currentQuestion].choice.map((answer: any, index: number) => (
-          <>
-            <Choice
-              key={index}
-              onClick={() => handelNextButton(answer.isCorrect)}
-            >
-              {answer.text}
-            </Choice>
-          </>
-        ))}
+        <Choice onClick={handelAnswerButton} id="1">
+          행복
+        </Choice>
+        <Choice onClick={handelAnswerButton} id="2">
+          슬픔
+        </Choice>
+        <Choice onClick={handelAnswerButton} id="3">
+          화남
+        </Choice>
+        <Choice onClick={handelAnswerButton} id="4">
+          무기력
+        </Choice>
       </ChoiceContainer>
-      {/* <NextQuestionBtn onClick={handelNextButton}>
-        다음 문제로 이동
-      </NextQuestionBtn> */}
     </FaceGameContainer>
   );
 };
@@ -127,7 +110,5 @@ const ChoiceContainer = styled.div`
   justify-content: center;
   margin-top: 30px;
 `;
-
-const NextQuestionBtn = styled.button``;
 
 export default FaceGamePage;
