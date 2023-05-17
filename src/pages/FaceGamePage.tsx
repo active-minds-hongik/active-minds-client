@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Timer from '../components/GamePage/Timer';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
@@ -37,8 +38,8 @@ const FaceGamePage = () => {
 
   const handelNextButton = (isCorrect: boolean) => {
     if (isCorrect) {
-      alert('정답');
-    } else alert('오답');
+      setCurrentScore(currentScore + 1);
+    }
 
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
@@ -51,6 +52,7 @@ const FaceGamePage = () => {
   return (
     <FaceGameContainer>
       <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
+      <Timer />
       <Current>
         {currentQuestion + 1} / {questions.length}
       </Current>
@@ -88,7 +90,7 @@ const BackBtn = styled.button`
   font-size: 20px;
   margin-right: auto;
   background-color: transparent;
-  &:hover{
+  &:hover {
     color: red;
   }
 `;
