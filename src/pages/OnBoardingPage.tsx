@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
+import { useRecoilState } from 'recoil';
+import { scoreState } from '../states';
 
 const OnBoardingPage = () => {
   const navigate = useNavigate();
+  const [currentScore, setCurrentScore] = useRecoilState(scoreState);
+
+  useEffect(() => {
+    setCurrentScore(0);
+  }, []);
 
   return (
     <Container>
@@ -59,7 +66,7 @@ const GameStartButton = styled.button`
 `;
 
 const ServiceText = styled.div`
-margin: 40px;
+  margin: 40px;
 `;
 
 export default OnBoardingPage;

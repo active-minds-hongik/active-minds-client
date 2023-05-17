@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Timer from '../components/GamePage/Timer';
+import { useRecoilState } from 'recoil';
+import { scoreState } from '../states';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
   // const [questions, setQuestions] = useState('');
-  const [currentScore, setCurrentScore] = useState(0);
+  const [currentScore, setCurrentScore] = useRecoilState(scoreState);
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const questions = [
