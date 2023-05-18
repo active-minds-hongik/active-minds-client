@@ -5,7 +5,7 @@ import Header from '../components/layout/Header';
 import { useRecoilState } from 'recoil';
 import { scoreState } from '../states';
 
-const ResultPage = () => {
+const Result1Page = () => {
   const [currentScore, setCurrentScore] = useRecoilState(scoreState);
   const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ const ResultPage = () => {
         <WrongQuestionsBtn onClick={() => navigate('/wrongs')}>
           틀린 문제 모아보기
         </WrongQuestionsBtn>
-        {/* 해당 게임 이름으로 이동 */}
         <GoHomeBtn onClick={() => navigate('/')}>홈으로 돌아가기</GoHomeBtn>
       </BtnContainer>
     </Container>
@@ -58,4 +57,4 @@ const BtnContainer = styled.div`
 `;
 const WrongQuestionsBtn = styled(GoHomeBtn)``;
 
-export default ResultPage;
+export default Result1Page;

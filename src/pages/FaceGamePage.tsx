@@ -36,6 +36,7 @@ const FaceGamePage = () => {
   return (
     <FaceGameContainer>
       <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
+      <GameName>표정-감정 매칭 게임</GameName>
       <Timer />
       <Current>
         {currentQuestion + 1} / {questions.length}
@@ -79,6 +80,11 @@ const BackBtn = styled.button`
     color: red;
   }
 `;
+
+const GameName = styled.div`
+  font-size: 30px;
+`;
+
 const Current = styled.div`
   font-size: 30px;
 `;
