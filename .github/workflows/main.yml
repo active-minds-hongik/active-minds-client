@@ -23,12 +23,11 @@ jobs:
 
       - name: Install Dependencies # node module install
         run: npm install
-        
-      - run: |
-          echo "/HolismHolding/Commands" >> $GITHUB_PATH
+        working-directory: ./
 
       - name: Build # project build
         run: num run build
+        working-directory: ./
 
       - name: Deploy 
         env:
