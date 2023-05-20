@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@master
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.14.2
 
       - name: Cache node modules  # node modules 캐싱
         uses: actions/cache@v1
@@ -25,7 +22,7 @@ jobs:
             ${{ runner.OS }}-
 
       - name: Install Dependencies # node module install
-        run: npm
+        run: npm install
 
       - name: Build # project build
         run: num run build
@@ -35,4 +32,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync ./build s3://[activemindshongik]
+          aws s3 sync ./build s3://activemindshongik
