@@ -29,7 +29,7 @@ const FaceGamePage = () => {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      navigate('/result');
+      navigate('/result1');
     }
   };
 

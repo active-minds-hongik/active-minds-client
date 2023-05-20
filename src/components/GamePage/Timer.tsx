@@ -12,7 +12,7 @@ const Timer = () => {
     if (count === 0) {
       clearInterval(id);
       alert('게임 종료');
-      navigate('/result');
+      navigate('/result1');
     }
     return () => clearInterval(id);
   }, [count]);
