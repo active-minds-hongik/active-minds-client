@@ -30,7 +30,10 @@ const MyFaceGamePage = () => {
 
   const handleResultBtn = () => {
     //api 연결
-    if (imageSrc) navigate('/result2'); // 사진 입력, 전송되었을 때만
+    if (imageSrc) {
+      navigate('/result2');
+      setImageSrc(null);
+    } // 사진 입력, 전송되었을 때만
     else alert('사진을 첨부하세요.');
   };
 
@@ -71,8 +74,8 @@ const MyFaceGameContainer = styled.div<{ isOpened: boolean }>`
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-color: ${props =>
-    (props.isOpened ? 'rgba(76, 76, 76, 0.7)' : 'whitesmoke')};
+  background-color: ${(props) =>
+    props.isOpened ? 'rgba(76, 76, 76, 0.7)' : 'whitesmoke'};
 `;
 
 const BackBtn = styled.button`
