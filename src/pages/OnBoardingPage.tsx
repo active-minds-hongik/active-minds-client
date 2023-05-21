@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { useRecoilState } from 'recoil';
 import { scoreState } from '../states';
+import { RxFace } from 'react-icons/rx';
+import { GoTextSize } from 'react-icons/go';
+import { BsFillCameraFill } from 'react-icons/bs';
+
 
 const OnBoardingPage = () => {
   const navigate = useNavigate();
@@ -17,25 +21,27 @@ const OnBoardingPage = () => {
     <Container>
       <Header />
       <ServiceText>
-        배포 테스트2
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 소개
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 소개
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 소개
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개서비스
-        소개 소개서비스 소개
+        배포 테스트2 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        서비스 소개 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        서비스 소개 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        서비스 소개 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        서비스 서비스 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        소개 서비스 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        소개 서비스 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        소개 서비스 서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개
+        소개서비스 소개 소개서비스 소개
       </ServiceText>
       <GameContainer>
         <GameStartButton onClick={() => navigate('/face-game')}>
+          <RxFace size={40} />
           표정-감정 매칭 게임
         </GameStartButton>
         <GameStartButton onClick={() => navigate('/text-game')}>
+          <GoTextSize size={40} />
           텍스트-감정 매칭 게임
         </GameStartButton>
         <GameStartButton onClick={() => navigate('/myface-game')}>
+          <BsFillCameraFill size={40} />
           얼굴 입력-감정 매칭 게임
         </GameStartButton>
       </GameContainer>
@@ -64,6 +70,9 @@ const GameStartButton = styled.button`
   margin: 10px;
   border-radius: 8px;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ServiceText = styled.div`
