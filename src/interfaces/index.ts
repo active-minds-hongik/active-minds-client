@@ -3,3 +3,8 @@ export interface IQuestion {
   imageURL: string;
   label: string;
 }
+
+export interface IWrongQuestion {
+  id: string;
+  myAnswer?: string;
+}

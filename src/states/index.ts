@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { IQuestion } from '../interfaces';
+import { IQuestion, IWrongQuestion } from '../interfaces';
 
 export const scoreState = atom<number>({
   key: 'score',
@@ -16,7 +16,7 @@ export const CapturedImgState = atom<string>({
   default: null,
 });
 
-export const wrongQuestionState = atom<string[]>({
+export const wrongQuestionState = atom<IWrongQuestion[]>({
   key: 'wrongQuestion',
   default: [],
 });

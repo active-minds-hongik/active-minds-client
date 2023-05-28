@@ -15,7 +15,7 @@ const FaceGamePage = () => {
 
   const questions = [
     { id: '1', imageURL: '사진1', label: '행복' },
-    { id: '2', imageURL: '사진2', lable: '슬픔' },
+    { id: '2', imageURL: '사진2', label: '슬픔' },
     { id: '3', imageURL: '사진3', label: '화남' },
     { id: '4', imageURL: '사진4', label: '무기력' },
   ];
@@ -28,7 +28,14 @@ const FaceGamePage = () => {
       setCurrentScore(currentScore + 1);
     } else {
       //오답이면
-      setWrongQuestion([...wrongQuestion, questions[currentQuestion].id]);
+      setWrongQuestion([
+        ...wrongQuestion,
+        {
+          id: questions[currentQuestion].id,
+          myAnswer: (e.target as HTMLElement).id,
+        }
+      ]);
+      console.log(wrongQuestion);
     }
 
     const nextQuestion = currentQuestion + 1;

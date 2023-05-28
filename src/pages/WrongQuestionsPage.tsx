@@ -4,10 +4,11 @@ import Header from '../components/layout/Header';
 import { useNavigate } from 'react-router-dom';
 import { wrongQuestionState, questionState } from '../states';
 import { useRecoilState } from 'recoil';
+import { IQuestion, IWrongQuestion } from '../interfaces';
 
 const WrongQuestionsPage = () => {
   const navigate = useNavigate();
-  const [wrongQuestion] = useRecoilState(wrongQuestionState);
+  const [wrongQuestion] = useRecoilState<IWrongQuestion[]>(wrongQuestionState);
   // const [questions, setQuestions] = useRecoilState(questionState);
 
   // 나중엔 recoil에서 가져올 거임
@@ -27,8 +28,11 @@ const WrongQuestionsPage = () => {
       <Header />
       <Title>틀린 문제</Title>
       <ScrollContainer>
-        {questions.map(({ id, imageURL, label }: any) => {
-          if (!wrongQuestion.includes(id)) {
+        {questions.map(({ id, imageURL, label }: IQuestion) => {
+          const wrongQuestionItem = wrongQuestion.find(
+            (item) => item.id === id,
+          );
+          if (!wrongQuestionItem) {
             // 맞은 문제는 포함 안 시킴
             return null;
           }
@@ -37,7 +41,9 @@ const WrongQuestionsPage = () => {
               <Img>{imageURL}</Img>
               <TextContainer>
                 <Answer>정답: {label}</Answer>
-                <UserAnswer>내가 고른 답: 새드</UserAnswer>
+                <UserAnswer>
+                  내가 고른 답: {wrongQuestionItem.myAnswer}
+                </UserAnswer>
               </TextContainer>
             </AnswerContainer>
           );
