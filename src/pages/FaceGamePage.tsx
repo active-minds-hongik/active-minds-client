@@ -33,7 +33,7 @@ const FaceGamePage = () => {
         {
           id: questions[currentQuestion].id,
           myAnswer: (e.target as HTMLElement).id,
-        }
+        },
       ]);
       console.log(wrongQuestion);
     }
@@ -49,12 +49,10 @@ const FaceGamePage = () => {
   return (
     <FaceGameContainer>
       <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
-      <GameName>표정-감정 매칭 게임</GameName>
+      <GameName>표정으로 감정 맞추기</GameName>
       <Timer />
-      <Current>
-        {currentQuestion + 1} / {questions.length}
-      </Current>
-      <Img>{questions[currentQuestion].imageURL}</Img>
+      <Current>{currentQuestion + 1}번 문제</Current>
+      <Img src={questions[currentQuestion].imageURL} />
       <ChoiceContainer>
         <Choice onClick={handelAnswerButton} id="행복">
           행복
@@ -80,14 +78,19 @@ const FaceGameContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const BackBtn = styled.button`
+const BackBtn = styled.div`
   width: 50px;
   height: 50px;
   font-size: 20px;
   margin-right: auto;
-  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     color: red;
+    cursor: pointer;
+    transform: scale(1.4);
+    transition: 0.3s;
   }
 `;
 
@@ -107,17 +110,15 @@ const Choice = styled.button`
   margin: 10px;
   border-radius: 5px;
   font-size: 20px;
-  background-color: pink;
-  &:hover {
-    background-color: green;
-  }
 `;
 
-const Img = styled.div`
-  background-color: pink;
+const Img = styled.img`
+  background-color: #66c84e;
   width: 300px;
   height: 300px;
   margin-top: 30px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 const ChoiceContainer = styled.div`

@@ -6,22 +6,25 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <HeaderContainer>
-      <Logo onClick={() => navigate('/')}>로고</Logo>
+      <Logo onClick={() => navigate('/')}></Logo>
     </HeaderContainer>
   );
 };
 
 const HeaderContainer = styled.div`
-  background-color: beige;
+  background-color: #aae6a1;
   width: 450px;
   height: 50px;
 `;
 
-const Logo = styled.button`
+const Logo = styled.div`
   width: 50px;
   height: 50px;
-  background-color: pink;
   margin-left: 20px;
+  background-color: green;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export default Header;

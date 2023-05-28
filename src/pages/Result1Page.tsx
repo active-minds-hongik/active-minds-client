@@ -47,7 +47,6 @@ const GoHomeBtn = styled.button`
   margin: 10px;
   border-radius: 5px;
   font-size: 16px;
-  background-color: pink;
 `;
 
 const BtnContainer = styled.div`

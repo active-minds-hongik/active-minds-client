@@ -38,7 +38,7 @@ const WrongQuestionsPage = () => {
           }
           return (
             <AnswerContainer key={id}>
-              <Img>{imageURL}</Img>
+              <Img />
               <TextContainer>
                 <Answer>정답: {label}</Answer>
                 <UserAnswer>
@@ -89,7 +89,6 @@ const GoHomeBtn = styled.button`
   margin: 20px;
   border-radius: 5px;
   font-size: 16px;
-  background-color: pink;
 `;
 
 const ScrollContainer = styled.div`
@@ -102,7 +101,6 @@ const ScrollContainer = styled.div`
 `;
 
 const AnswerContainer = styled.div`
-  border: 1px solid;
   width: 80%;
   height: 200px;
   display: flex;
@@ -110,12 +108,17 @@ const AnswerContainer = styled.div`
   padding: 10px;
   justify-content: space-around;
   margin: 10px 0px;
+  background-color: beige;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const Img = styled.div`
+const Img = styled.img`
   width: 130px;
   height: 130px;
-  background-color: pink;
+  background-color: #66c84e;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 export default WrongQuestionsPage;
