@@ -3,28 +3,34 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Timer from '../components/GamePage/Timer';
 import { useRecoilState } from 'recoil';
-import { scoreState } from '../states';
+import { scoreState, wrongQuestionState, questionState } from '../states';
+import { IQuestion } from '../interfaces';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
-  // const [questions, setQuestions] = useState('');
+  // const [questions, setQuestions] = useRecoilState(questionState);
   const [currentScore, setCurrentScore] = useRecoilState(scoreState);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [wrongQuestion, setWrongQuestion] = useRecoilState(wrongQuestionState);
 
   const questions = [
-    { choice: [{ url: '사진1', answer: '1' }] },
-    { choice: [{ url: '사진2', answer: '2' }] },
-    { choice: [{ url: '사진3', answer: '3' }] },
-    { choice: [{ url: '사진4', answer: '4' }] },
+    { id: '1', imageURL: '사진1', label: '행복' },
+    { id: '2', imageURL: '사진2', lable: '슬픔' },
+    { id: '3', imageURL: '사진3', label: '화남' },
+    { id: '4', imageURL: '사진4', label: '무기력' },
   ];
 
   const handelAnswerButton = (e: React.MouseEvent<HTMLElement>) => {
     if (
-      (e.target as HTMLElement).id ===
-      questions[currentQuestion].choice[0].answer
+      //정답이면
+      (e.target as HTMLElement).id === questions[currentQuestion].label
     ) {
       setCurrentScore(currentScore + 1);
+    } else {
+      //오답이면
+      setWrongQuestion([...wrongQuestion, questions[currentQuestion].id]);
     }
+
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -41,21 +47,18 @@ const FaceGamePage = () => {
       <Current>
         {currentQuestion + 1} / {questions.length}
       </Current>
-      {questions[currentQuestion].choice.map((answer: any, index: number) => (
-        <Img>{answer.url}</Img>
-      ))}
-
+      <Img>{questions[currentQuestion].imageURL}</Img>
       <ChoiceContainer>
-        <Choice onClick={handelAnswerButton} id="1">
+        <Choice onClick={handelAnswerButton} id="행복">
           행복
         </Choice>
-        <Choice onClick={handelAnswerButton} id="2">
+        <Choice onClick={handelAnswerButton} id="슬픔">
           슬픔
         </Choice>
-        <Choice onClick={handelAnswerButton} id="3">
+        <Choice onClick={handelAnswerButton} id="화남">
           화남
         </Choice>
-        <Choice onClick={handelAnswerButton} id="4">
+        <Choice onClick={handelAnswerButton} id="무기력">
           무기력
         </Choice>
       </ChoiceContainer>

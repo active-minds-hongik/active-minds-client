@@ -1,44 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/layout/Header';
 import { useNavigate } from 'react-router-dom';
+import { wrongQuestionState, questionState } from '../states';
+import { useRecoilState } from 'recoil';
 
 const WrongQuestionsPage = () => {
   const navigate = useNavigate();
+  const [wrongQuestion] = useRecoilState(wrongQuestionState);
+  // const [questions, setQuestions] = useRecoilState(questionState);
+
+  // 나중엔 recoil에서 가져올 거임
+  const questions = [
+    { id: '1', imageURL: '사진1', label: '행복' },
+    { id: '2', imageURL: '사진2', label: '슬픔' },
+    { id: '3', imageURL: '사진3', label: '화남' },
+    { id: '4', imageURL: '사진4', label: '무기력' },
+  ];
+
+  useEffect(() => {
+    console.log(wrongQuestion);
+  }, []);
 
   return (
     <Container>
       <Header />
       <Title>틀린 문제</Title>
       <ScrollContainer>
-        <AnswerContainer>
-          <Img />
-          <TextContainer>
-            <Answer>정답: 해피</Answer>
-            <UserAnswer>내가 고른 답: 새드</UserAnswer>
-          </TextContainer>
-        </AnswerContainer>
-        <AnswerContainer>
-          <Img />
-          <TextContainer>
-            <Answer>정답: 해피</Answer>
-            <UserAnswer>내가 고른 답: 새드</UserAnswer>
-          </TextContainer>
-        </AnswerContainer>
-        <AnswerContainer>
-          <Img />
-          <TextContainer>
-            <Answer>정답: 해피</Answer>
-            <UserAnswer>내가 고른 답: 새드</UserAnswer>
-          </TextContainer>
-        </AnswerContainer>
-        <AnswerContainer>
-          <Img />
-          <TextContainer>
-            <Answer>정답: 해피</Answer>
-            <UserAnswer>내가 고른 답: 새드</UserAnswer>
-          </TextContainer>
-        </AnswerContainer>
+        {questions.map(({ id, imageURL, label }: any) => {
+          if (!wrongQuestion.includes(id)) {
+            // 맞은 문제는 포함 안 시킴
+            return null;
+          }
+          return (
+            <AnswerContainer key={id}>
+              <Img>{imageURL}</Img>
+              <TextContainer>
+                <Answer>정답: {label}</Answer>
+                <UserAnswer>내가 고른 답: 새드</UserAnswer>
+              </TextContainer>
+            </AnswerContainer>
+          );
+        })}
       </ScrollContainer>
       <GoHomeBtn onClick={() => navigate('/')}>홈으로 돌아가기</GoHomeBtn>
     </Container>

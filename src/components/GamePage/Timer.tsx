@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Timer = () => {
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(60);
   const navigate = useNavigate();
 
   useEffect(() => {

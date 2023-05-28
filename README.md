@@ -1,1 +1,1 @@
-첫번째 s3 테스트
+Active Minds 프론트엔드
