@@ -78,15 +78,20 @@ const MyFaceGameContainer = styled.div<{ isOpened: boolean }>`
     props.isOpened ? 'rgba(76, 76, 76, 0.7)' : 'whitesmoke'};
 `;
 
-const BackBtn = styled.button`
+const BackBtn = styled.div`
   width: 50px;
   height: 50px;
   font-size: 20px;
   margin-right: auto;
-  background-color: transparent;
   color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     color: red;
+    cursor: pointer;
+    transform: scale(1.4);
+    transition: 0.3s;
   }
 `;
 
@@ -97,7 +102,6 @@ const GameName = styled.div`
 const ResultBtn = styled.button`
   width: 80%;
   height: 70px;
-  background-color: pink;
   border-radius: 20px;
   font-size: 30px;
   position: absolute;
