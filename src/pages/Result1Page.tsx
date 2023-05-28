@@ -3,21 +3,26 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { useRecoilState } from 'recoil';
-import { scoreState } from '../states';
+import { scoreState, wrongQuestionState } from '../states';
 
 const Result1Page = () => {
   const [currentScore, setCurrentScore] = useRecoilState(scoreState);
+  const [wrongQuestion, setWrongQuestion] = useRecoilState(wrongQuestionState);
   const navigate = useNavigate();
 
   return (
     <Container>
       <Header />
-      <GameName>게임이름</GameName>
+      <GameName>게임 결과</GameName>
       <Score>{currentScore * 10}점</Score>
       <BtnContainer>
-        <WrongQuestionsBtn onClick={() => navigate('/wrongs')}>
-          틀린 문제 모아보기
-        </WrongQuestionsBtn>
+        {wrongQuestion.length !== 0 ? (
+          <WrongQuestionsBtn onClick={() => navigate('/wrongs')}>
+            틀린 문제 모아보기
+          </WrongQuestionsBtn>
+        ) : (
+          <></>
+        )}
         <GoHomeBtn onClick={() => navigate('/')}>홈으로 돌아가기</GoHomeBtn>
       </BtnContainer>
     </Container>
