@@ -1,0 +1,9 @@
+.start {
+  transform: scale(0);
+  width: 500px;
+}
+.end {
+  transform: scale(1);
+  transition :all 0.5s;
+  width: 500px
+}

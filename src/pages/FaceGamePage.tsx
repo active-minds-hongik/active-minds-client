@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import Timer from '../components/GamePage/Timer';
 import { useRecoilState } from 'recoil';
 import { scoreState, wrongQuestionState, questionState } from '../states';
-import { IQuestion } from '../interfaces';
+import * as Style from '../css/GamePageStyle';
+import { baseURL } from '../api/client';
+import axios from 'axios';
+import { motion } from 'framer-motion';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
@@ -12,6 +14,25 @@ const FaceGamePage = () => {
   const [currentScore, setCurrentScore] = useRecoilState(scoreState);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [wrongQuestion, setWrongQuestion] = useRecoilState(wrongQuestionState);
+
+  useEffect(() => {
+    getFaceAPI();
+  }, []);
+
+  const getFaceAPI = async () => {
+    await axios
+      .get(`${baseURL}/emotion`, {
+        headers: {
+          'Content-Type': `application/json`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const questions = [
     { id: '1', imageURL: '사진1', label: '행복' },
@@ -47,85 +68,34 @@ const FaceGamePage = () => {
   };
 
   return (
-    <FaceGameContainer>
-      <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
-      <GameName>표정으로 감정 맞추기</GameName>
-      <Timer />
-      <Current>{currentQuestion + 1}번 문제</Current>
-      <Img src={questions[currentQuestion].imageURL} />
-      <ChoiceContainer>
-        <Choice onClick={handelAnswerButton} id="행복">
-          행복
-        </Choice>
-        <Choice onClick={handelAnswerButton} id="슬픔">
-          슬픔
-        </Choice>
-        <Choice onClick={handelAnswerButton} id="화남">
-          화남
-        </Choice>
-        <Choice onClick={handelAnswerButton} id="무기력">
-          무기력
-        </Choice>
-      </ChoiceContainer>
-    </FaceGameContainer>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Style.FaceGameContainer>
+        <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+        <Style.GameName>표정으로 감정 맞추기</Style.GameName>
+        <Timer />
+        <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
+        <Style.Img src={questions[currentQuestion].imageURL} />
+        <Style.ChoiceContainer>
+          <Style.Choice onClick={handelAnswerButton} id="행복">
+            행복
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="슬픔">
+            슬픔
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="화남">
+            화남
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="무기력">
+            무기력
+          </Style.Choice>
+        </Style.ChoiceContainer>
+      </Style.FaceGameContainer>
+    </motion.div>
   );
 };
-const FaceGameContainer = styled.div`
-  width: 450px;
-  height: 100vh;
-  background-color: whitesmoke;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const BackBtn = styled.div`
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    color: red;
-    cursor: pointer;
-    transform: scale(1.4);
-    transition: 0.3s;
-  }
-`;
-
-const GameName = styled.div`
-  font-size: 30px;
-`;
-
-const Current = styled.div`
-  font-size: 30px;
-`;
-const Question = styled.div`
-  font-size: 20px;
-`;
-const Choice = styled.button`
-  width: 200px;
-  height: 40px;
-  margin: 10px;
-  border-radius: 5px;
-  font-size: 20px;
-`;
-
-const Img = styled.img`
-  background-color: #66c84e;
-  width: 300px;
-  height: 300px;
-  margin-top: 30px;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-`;
-
-const ChoiceContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 30px;
-`;
 
 export default FaceGamePage;

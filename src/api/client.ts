@@ -1,0 +1,1 @@
+export const baseURL = 'https://www.activeminds.co.kr/api';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import fileupload from '../img/fileupload.png';
@@ -6,6 +6,7 @@ import { BsFillCameraFill } from 'react-icons/bs';
 import { useRecoilState } from 'recoil';
 import { modalState, CapturedImgState } from '../states';
 import CameraModal from '../components/GamePage/CameraModal';
+import { motion } from 'framer-motion';
 
 const MyFaceGamePage = () => {
   const fileInput = React.useRef(null);
@@ -14,6 +15,22 @@ const MyFaceGamePage = () => {
   const navigate = useNavigate();
   const handleInputBtn = (e: React.MouseEvent<HTMLElement>) => {
     fileInput.current.click();
+  };
+
+  const [stream, setStream] = useState<MediaStream | null>(null);
+
+  useEffect(() => {
+    requestCameraAccess();
+  }, []);
+
+  const requestCameraAccess = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      setStream(stream);
+    } catch (error) {
+      console.log('카메라 접근 권한을 허용해야 합니다.', error);
+      alert('카메라 접근 권한을 허용해야 합니다.');
+    }
   };
   const handleChange = (e: any) => {
     const file = e.target.files[0];
@@ -38,31 +55,37 @@ const MyFaceGamePage = () => {
   };
 
   return (
-    <MyFaceGameContainer isOpened={isOpened}>
-      <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
-      <GameName>얼굴 입력-감정 매칭 게임</GameName>
-      {imageSrc ? (
-        <Img src={imageSrc} alt="uploadImg" onClick={handleInputBtn} />
-      ) : (
-        <Img src={fileupload} alt="uploadImg" onClick={handleInputBtn} />
-      )}
-      <CameraBtn
-        size={50}
-        onClick={() => {
-          setIsOpened(!isOpened);
-          setImageSrc(null);
-        }}
-      />
-      <ResultBtn onClick={handleResultBtn}>결과 보기</ResultBtn>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInput}
-        onChange={handleChange}
-        style={{ display: 'none' }}
-      />
-      <ModalContainer>{isOpened ? <CameraModal /> : null}</ModalContainer>
-    </MyFaceGameContainer>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <MyFaceGameContainer isOpened={isOpened}>
+        <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
+        <GameName>얼굴 입력-감정 매칭 게임</GameName>
+        {imageSrc ? (
+          <Img src={imageSrc} alt="uploadImg" onClick={handleInputBtn} />
+        ) : (
+          <Img src={fileupload} alt="uploadImg" onClick={handleInputBtn} />
+        )}
+        <CameraBtn
+          size={50}
+          onClick={() => {
+            setIsOpened(!isOpened);
+            setImageSrc(null);
+          }}
+        />
+        <ResultBtn onClick={handleResultBtn}>결과 보기</ResultBtn>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInput}
+          onChange={handleChange}
+          style={{ display: 'none' }}
+        />
+        <ModalContainer>{isOpened ? <CameraModal /> : null}</ModalContainer>
+      </MyFaceGameContainer>
+    </motion.div>
   );
 };
 

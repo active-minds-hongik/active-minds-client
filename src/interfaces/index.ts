@@ -1,6 +1,7 @@
 export interface IQuestion {
   id: string;
-  imageURL: string;
+  imageURL?: string;
+  document?: string;
   label: string;
 }
 
