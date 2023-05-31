@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import fileupload from '../img/fileupload.png';
@@ -14,6 +14,22 @@ const MyFaceGamePage = () => {
   const navigate = useNavigate();
   const handleInputBtn = (e: React.MouseEvent<HTMLElement>) => {
     fileInput.current.click();
+  };
+
+  const [stream, setStream] = useState<MediaStream | null>(null);
+
+  useEffect(() => {
+    requestCameraAccess();
+  }, []);
+
+  const requestCameraAccess = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      setStream(stream);
+    } catch (error) {
+      console.log('카메라 접근 권한을 허용해야 합니다.', error);
+      alert('카메라 접근 권한을 허용해야 합니다.');
+    }
   };
   const handleChange = (e: any) => {
     const file = e.target.files[0];
