@@ -6,6 +6,7 @@ import { BsFillCameraFill } from 'react-icons/bs';
 import { useRecoilState } from 'recoil';
 import { modalState, CapturedImgState } from '../states';
 import CameraModal from '../components/GamePage/CameraModal';
+import { motion } from 'framer-motion';
 
 const MyFaceGamePage = () => {
   const fileInput = React.useRef(null);
@@ -54,31 +55,37 @@ const MyFaceGamePage = () => {
   };
 
   return (
-    <MyFaceGameContainer isOpened={isOpened}>
-      <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
-      <GameName>얼굴 입력-감정 매칭 게임</GameName>
-      {imageSrc ? (
-        <Img src={imageSrc} alt="uploadImg" onClick={handleInputBtn} />
-      ) : (
-        <Img src={fileupload} alt="uploadImg" onClick={handleInputBtn} />
-      )}
-      <CameraBtn
-        size={50}
-        onClick={() => {
-          setIsOpened(!isOpened);
-          setImageSrc(null);
-        }}
-      />
-      <ResultBtn onClick={handleResultBtn}>결과 보기</ResultBtn>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInput}
-        onChange={handleChange}
-        style={{ display: 'none' }}
-      />
-      <ModalContainer>{isOpened ? <CameraModal /> : null}</ModalContainer>
-    </MyFaceGameContainer>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <MyFaceGameContainer isOpened={isOpened}>
+        <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
+        <GameName>얼굴 입력-감정 매칭 게임</GameName>
+        {imageSrc ? (
+          <Img src={imageSrc} alt="uploadImg" onClick={handleInputBtn} />
+        ) : (
+          <Img src={fileupload} alt="uploadImg" onClick={handleInputBtn} />
+        )}
+        <CameraBtn
+          size={50}
+          onClick={() => {
+            setIsOpened(!isOpened);
+            setImageSrc(null);
+          }}
+        />
+        <ResultBtn onClick={handleResultBtn}>결과 보기</ResultBtn>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInput}
+          onChange={handleChange}
+          style={{ display: 'none' }}
+        />
+        <ModalContainer>{isOpened ? <CameraModal /> : null}</ModalContainer>
+      </MyFaceGameContainer>
+    </motion.div>
   );
 };
 

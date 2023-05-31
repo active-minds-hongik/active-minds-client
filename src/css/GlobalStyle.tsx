@@ -22,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     background-color: #66c84e;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-weight: 500;
     &:hover {
     background-color: #0287d3;
     transform: scale(1.1);

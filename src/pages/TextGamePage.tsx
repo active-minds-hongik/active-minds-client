@@ -7,6 +7,8 @@ import * as Style from '../css/GamePageStyle';
 import axios from 'axios';
 import { baseURL } from '../api/client';
 import { IQuestion } from '../interfaces/index';
+import { motion } from 'framer-motion';
+
 
 const TextGamePage = () => {
   const navigate = useNavigate();
@@ -68,21 +70,27 @@ const TextGamePage = () => {
   };
 
   return (
-    <Style.FaceGameContainer>
-      <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
-      <Style.GameName>텍스트로 감정 맞추기</Style.GameName>
-      <Timer />
-      <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Style.FaceGameContainer>
+        <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+        <Style.GameName>텍스트로 감정 맞추기</Style.GameName>
+        <Timer />
+        <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
         <Style.Question>{questions[currentQuestion].document}</Style.Question>
-      <Style.ChoiceContainer>
-        <Style.Choice onClick={handelAnswerButton} id="positive">
-          긍정
-        </Style.Choice>
-        <Style.Choice onClick={handelAnswerButton} id="negative">
-          부정
-        </Style.Choice>
-      </Style.ChoiceContainer>
-    </Style.FaceGameContainer>
+        <Style.ChoiceContainer>
+          <Style.Choice onClick={handelAnswerButton} id="positive">
+            긍정
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="negative">
+            부정
+          </Style.Choice>
+        </Style.ChoiceContainer>
+      </Style.FaceGameContainer>
+    </motion.div>
   );
 };
 

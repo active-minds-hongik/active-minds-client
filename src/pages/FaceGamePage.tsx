@@ -6,6 +6,7 @@ import { scoreState, wrongQuestionState, questionState } from '../states';
 import * as Style from '../css/GamePageStyle';
 import { baseURL } from '../api/client';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
@@ -67,27 +68,33 @@ const FaceGamePage = () => {
   };
 
   return (
-    <Style.FaceGameContainer>
-      <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
-      <Style.GameName>표정으로 감정 맞추기</Style.GameName>
-      <Timer />
-      <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
-      <Style.Img src={questions[currentQuestion].imageURL} />
-      <Style.ChoiceContainer>
-        <Style.Choice onClick={handelAnswerButton} id="행복">
-          행복
-        </Style.Choice>
-        <Style.Choice onClick={handelAnswerButton} id="슬픔">
-          슬픔
-        </Style.Choice>
-        <Style.Choice onClick={handelAnswerButton} id="화남">
-          화남
-        </Style.Choice>
-        <Style.Choice onClick={handelAnswerButton} id="무기력">
-          무기력
-        </Style.Choice>
-      </Style.ChoiceContainer>
-    </Style.FaceGameContainer>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Style.FaceGameContainer>
+        <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+        <Style.GameName>표정으로 감정 맞추기</Style.GameName>
+        <Timer />
+        <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
+        <Style.Img src={questions[currentQuestion].imageURL} />
+        <Style.ChoiceContainer>
+          <Style.Choice onClick={handelAnswerButton} id="행복">
+            행복
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="슬픔">
+            슬픔
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="화남">
+            화남
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="무기력">
+            무기력
+          </Style.Choice>
+        </Style.ChoiceContainer>
+      </Style.FaceGameContainer>
+    </motion.div>
   );
 };
 
