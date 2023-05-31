@@ -12,11 +12,34 @@ const WrongQuestionsPage = () => {
   // const [questions, setQuestions] = useRecoilState(questionState);
 
   // 나중엔 recoil에서 가져올 거임
+  // const questions = [
+  //   { id: '1', imageURL: '사진1', label: '행복' },
+  //   { id: '2', imageURL: '사진2', label: '슬픔' },
+  //   { id: '3', imageURL: '사진3', label: '화남' },
+  //   { id: '4', imageURL: '사진4', label: '무기력' },
+  // ];
+
   const questions = [
-    { id: '1', imageURL: '사진1', label: '행복' },
-    { id: '2', imageURL: '사진2', label: '슬픔' },
-    { id: '3', imageURL: '사진3', label: '화남' },
-    { id: '4', imageURL: '사진4', label: '무기력' },
+    {
+      id: '1',
+      document: '원작의 긴장감을 제대로 살려내지못했다.1',
+      label: '행복',
+    },
+    {
+      id: '2',
+      document: '원작의 긴장감을 제대로 살려내지못했다.2',
+      label: '슬픔',
+    },
+    {
+      id: '3',
+      document: '원작의 긴장감을 제대로 살려내지못했다.3',
+      label: '화남',
+    },
+    {
+      id: '4',
+      document: '원작의 긴장감을 제대로 살려내지못했다.4',
+      label: '무기력',
+    },
   ];
 
   useEffect(() => {
@@ -28,7 +51,7 @@ const WrongQuestionsPage = () => {
       <Header />
       <Title>틀린 문제</Title>
       <ScrollContainer>
-        {questions.map(({ id, imageURL, label }: IQuestion) => {
+        {questions.map(({ id, imageURL, document, label }: IQuestion) => {
           const wrongQuestionItem = wrongQuestion.find(
             (item) => item.id === id,
           );
@@ -38,8 +61,9 @@ const WrongQuestionsPage = () => {
           }
           return (
             <AnswerContainer key={id}>
-              <Img />
+              {imageURL ? <QuestionImg src={imageURL} /> : <></>}
               <TextContainer>
+                {document ? <QuestionText>{document}</QuestionText> : <></>}
                 <Answer>정답: {label}</Answer>
                 <UserAnswer>
                   내가 고른 답: {wrongQuestionItem.myAnswer}
@@ -72,12 +96,14 @@ const Title = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px;
 `;
 
 const Answer = styled.div`
   font-size: 20px;
   margin-bottom: 10px;
+  margin-top: 10px;
+  color: #0287d3;
+  font-weight: 600;
 `;
 
 const UserAnswer = styled.div`
@@ -101,11 +127,10 @@ const ScrollContainer = styled.div`
 `;
 
 const AnswerContainer = styled.div`
-  width: 80%;
+  width: 90%;
   height: 200px;
   display: flex;
   align-items: center;
-  padding: 10px;
   justify-content: space-around;
   margin: 10px 0px;
   background-color: beige;
@@ -113,12 +138,21 @@ const AnswerContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const Img = styled.img`
+const QuestionImg = styled.img`
   width: 130px;
   height: 130px;
   background-color: #66c84e;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+`;
+
+const QuestionText = styled.div`
+  font-size: 16px;
+  margin-bottom: 10px;
+  background-color: #66c84e;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
 `;
 
 export default WrongQuestionsPage;
