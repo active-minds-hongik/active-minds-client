@@ -1,8 +1,9 @@
 export interface IQuestion {
   id: string;
-  imageURL?: string;
+  pixels?: string;
   document?: string;
-  label: string;
+  label?: string;
+  emotionNum?: number;
 }
 
 export interface IWrongQuestion {
