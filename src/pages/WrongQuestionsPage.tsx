@@ -9,38 +9,7 @@ import { IQuestion, IWrongQuestion } from '../interfaces';
 const WrongQuestionsPage = () => {
   const navigate = useNavigate();
   const [wrongQuestion] = useRecoilState<IWrongQuestion[]>(wrongQuestionState);
-  // const [questions, setQuestions] = useRecoilState(questionState);
-
-  // 나중엔 recoil에서 가져올 거임
-  // const questions = [
-  //   { id: '1', imageURL: '사진1', label: '행복' },
-  //   { id: '2', imageURL: '사진2', label: '슬픔' },
-  //   { id: '3', imageURL: '사진3', label: '화남' },
-  //   { id: '4', imageURL: '사진4', label: '무기력' },
-  // ];
-
-  const questions = [
-    {
-      id: '1',
-      document: '원작의 긴장감을 제대로 살려내지못했다.1',
-      label: '행복',
-    },
-    {
-      id: '2',
-      document: '원작의 긴장감을 제대로 살려내지못했다.2',
-      label: '슬픔',
-    },
-    {
-      id: '3',
-      document: '원작의 긴장감을 제대로 살려내지못했다.3',
-      label: '화남',
-    },
-    {
-      id: '4',
-      document: '원작의 긴장감을 제대로 살려내지못했다.4',
-      label: '무기력',
-    },
-  ];
+  const [questions, setQuestions] = useRecoilState(questionState);
 
   useEffect(() => {
     console.log(wrongQuestion);
@@ -51,27 +20,96 @@ const WrongQuestionsPage = () => {
       <Header />
       <Title>틀린 문제</Title>
       <ScrollContainer>
-        {questions.map(({ id, imageURL, document, label }: IQuestion) => {
-          const wrongQuestionItem = wrongQuestion.find(
-            (item) => item.id === id,
-          );
-          if (!wrongQuestionItem) {
-            // 맞은 문제는 포함 안 시킴
-            return null;
-          }
-          return (
-            <AnswerContainer key={id}>
-              {imageURL ? <QuestionImg src={imageURL} /> : <></>}
-              <TextContainer>
-                {document ? <QuestionText>{document}</QuestionText> : <></>}
-                <Answer>정답: {label}</Answer>
-                <UserAnswer>
-                  내가 고른 답: {wrongQuestionItem.myAnswer}
-                </UserAnswer>
-              </TextContainer>
-            </AnswerContainer>
-          );
-        })}
+        {questions.map(
+          ({ id, pixels, document, label, emotionNum }: IQuestion) => {
+            const wrongQuestionItem = wrongQuestion.find(
+              (item) => item.id === id,
+            );
+            if (!wrongQuestionItem) {
+              // 맞은 문제는 포함 안 시킴
+              return null;
+            }
+
+            let emotionText;
+            switch (emotionNum) {
+              case 0:
+                emotionText = '행복';
+                break;
+              case 1:
+                emotionText = '슬픔';
+                break;
+              case 2:
+                emotionText = '화남';
+                break;
+              case 3:
+                emotionText = '무기력';
+                break;
+              case 4:
+                emotionText = '어쩌고';
+                break;
+              case 5:
+                emotionText = '저쩌고';
+                break;
+              case 6:
+                emotionText = '어쩔저쩔';
+                break;
+              default:
+                emotionText = '';
+                break;
+            }
+
+             let userAnswerText;
+            switch (wrongQuestionItem.myAnswer) {
+              case '0':
+                userAnswerText = '행복';
+                break;
+              case '1':
+                userAnswerText = '슬픔';
+                break;
+              case '2':
+                userAnswerText = '화남';
+                break;
+              case '3':
+                userAnswerText = '무기력';
+                break;
+              case '4':
+                userAnswerText = '어쩌고';
+                break;
+              case '5':
+                userAnswerText = '저쩌고';
+                break;
+              case '6':
+                userAnswerText = '어쩔저쩔';
+                break;
+              default:
+                userAnswerText = '';
+                break;
+            }
+
+            return (
+              <AnswerContainer key={id}>
+                {pixels ? (
+                  <>
+                    <QuestionImg src={pixels} />
+                    <TextContainer>
+                      <Answer>정답: {emotionText}</Answer>
+                      <UserAnswer>내가 고른 답: {userAnswerText}</UserAnswer>
+                    </TextContainer>
+                  </>
+                ) : (
+                  <TextContainer>
+                    <QuestionText>{document}</QuestionText>
+                    <Answer>정답: {label === '0' ? '부정' : '긍정'}</Answer>
+                    <UserAnswer>
+                      내가 고른 답:{' '}
+                      {wrongQuestionItem.myAnswer === '0' ? '부정' : '긍정'}
+                    </UserAnswer>
+                  </TextContainer>
+                )}
+              </AnswerContainer>
+            );
+          },
+        )}
       </ScrollContainer>
       <GoHomeBtn onClick={() => navigate('/')}>홈으로 돌아가기</GoHomeBtn>
     </Container>

@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
-  // const [questions, setQuestions] = useRecoilState(questionState);
+  const [questions, setQuestions] = useRecoilState(questionState);
   const [currentScore, setCurrentScore] = useRecoilState(scoreState);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [wrongQuestion, setWrongQuestion] = useRecoilState(wrongQuestionState);
@@ -27,24 +27,18 @@ const FaceGamePage = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
+        setQuestions(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  const questions = [
-    { id: '1', imageURL: '사진1', label: '행복' },
-    { id: '2', imageURL: '사진2', label: '슬픔' },
-    { id: '3', imageURL: '사진3', label: '화남' },
-    { id: '4', imageURL: '사진4', label: '무기력' },
-  ];
-
   const handelAnswerButton = (e: React.MouseEvent<HTMLElement>) => {
     if (
       //정답이면
-      (e.target as HTMLElement).id === questions[currentQuestion].label
+      Number((e.target as HTMLElement).id) === questions[currentQuestion].emotionNum
     ) {
       setCurrentScore(currentScore + 1);
     } else {
@@ -78,19 +72,28 @@ const FaceGamePage = () => {
         <Style.GameName>표정으로 감정 맞추기</Style.GameName>
         <Timer />
         <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
-        <Style.Img src={questions[currentQuestion].imageURL} />
+        {/* <Style.Img src={questions[currentQuestion].pixels} /> */}
         <Style.ChoiceContainer>
-          <Style.Choice onClick={handelAnswerButton} id="행복">
+          <Style.Choice onClick={handelAnswerButton} id="0">
             행복
           </Style.Choice>
-          <Style.Choice onClick={handelAnswerButton} id="슬픔">
+          <Style.Choice onClick={handelAnswerButton} id="1">
             슬픔
           </Style.Choice>
-          <Style.Choice onClick={handelAnswerButton} id="화남">
+          <Style.Choice onClick={handelAnswerButton} id="2">
             화남
           </Style.Choice>
-          <Style.Choice onClick={handelAnswerButton} id="무기력">
+          <Style.Choice onClick={handelAnswerButton} id="3">
             무기력
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="4">
+            어쩌고
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="5">
+            저쩌고
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="6">
+            어쩔저쩔
           </Style.Choice>
         </Style.ChoiceContainer>
       </Style.FaceGameContainer>
