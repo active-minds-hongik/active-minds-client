@@ -9,7 +9,7 @@ import { IQuestion, IWrongQuestion } from '../interfaces';
 const WrongQuestionsPage = () => {
   const navigate = useNavigate();
   const [wrongQuestion] = useRecoilState<IWrongQuestion[]>(wrongQuestionState);
-  // const [questions, setQuestions] = useRecoilState(questionState);
+  const [questions, setQuestions] = useRecoilState(questionState);
 
   // 나중엔 recoil에서 가져올 거임
   // const questions = [
@@ -19,28 +19,28 @@ const WrongQuestionsPage = () => {
   //   { id: '4', imageURL: '사진4', label: '무기력' },
   // ];
 
-  const questions = [
-    {
-      id: '1',
-      document: '원작의 긴장감을 제대로 살려내지못했다.1',
-      label: '행복',
-    },
-    {
-      id: '2',
-      document: '원작의 긴장감을 제대로 살려내지못했다.2',
-      label: '슬픔',
-    },
-    {
-      id: '3',
-      document: '원작의 긴장감을 제대로 살려내지못했다.3',
-      label: '화남',
-    },
-    {
-      id: '4',
-      document: '원작의 긴장감을 제대로 살려내지못했다.4',
-      label: '무기력',
-    },
-  ];
+  // const questions = [
+  //   {
+  //     id: '1',
+  //     document: '원작의 긴장감을 제대로 살려내지못했다.1',
+  //     label: '행복',
+  //   },
+  //   {
+  //     id: '2',
+  //     document: '원작의 긴장감을 제대로 살려내지못했다.2',
+  //     label: '슬픔',
+  //   },
+  //   {
+  //     id: '3',
+  //     document: '원작의 긴장감을 제대로 살려내지못했다.3',
+  //     label: '화남',
+  //   },
+  //   {
+  //     id: '4',
+  //     document: '원작의 긴장감을 제대로 살려내지못했다.4',
+  //     label: '무기력',
+  //   },
+  // ];
 
   useEffect(() => {
     console.log(wrongQuestion);
@@ -64,9 +64,10 @@ const WrongQuestionsPage = () => {
               {imageURL ? <QuestionImg src={imageURL} /> : <></>}
               <TextContainer>
                 {document ? <QuestionText>{document}</QuestionText> : <></>}
-                <Answer>정답: {label}</Answer>
+                <Answer>정답: {label === '0' ? '부정' : '긍정'}</Answer>
                 <UserAnswer>
-                  내가 고른 답: {wrongQuestionItem.myAnswer}
+                  내가 고른 답:{' '}
+                  {wrongQuestionItem.myAnswer === '0' ? '부정' : '긍정'}
                 </UserAnswer>
               </TextContainer>
             </AnswerContainer>

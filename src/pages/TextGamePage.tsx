@@ -9,20 +9,12 @@ import { baseURL } from '../api/client';
 import { IQuestion } from '../interfaces/index';
 import { motion } from 'framer-motion';
 
-
 const TextGamePage = () => {
   const navigate = useNavigate();
-  // const [questions, setQuestions] = useRecoilState(questionState);
+  const [questions, setQuestions] = useRecoilState(questionState);
   const [currentScore, setCurrentScore] = useRecoilState(scoreState);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [wrongQuestion, setWrongQuestion] = useRecoilState(wrongQuestionState);
-
-  const questions = [
-    { id: '1', document: '문제1', label: 'positive' },
-    { id: '2', document: '문제2', label: 'negative' },
-    { id: '3', document: '문제3', label: 'positive' },
-    { id: '4', document: '문제4', label: 'negative' },
-  ];
 
   useEffect(() => {
     getTextAPI();
@@ -36,7 +28,8 @@ const TextGamePage = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
+        setQuestions(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -80,12 +73,14 @@ const TextGamePage = () => {
         <Style.GameName>텍스트로 감정 맞추기</Style.GameName>
         <Timer />
         <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
-        <Style.Question>{questions[currentQuestion].document}</Style.Question>
+        <Style.Question>
+          {questions.length > 0 && questions[currentQuestion].document}
+        </Style.Question>
         <Style.ChoiceContainer>
-          <Style.Choice onClick={handelAnswerButton} id="positive">
+          <Style.Choice onClick={handelAnswerButton} id="1">
             긍정
           </Style.Choice>
-          <Style.Choice onClick={handelAnswerButton} id="negative">
+          <Style.Choice onClick={handelAnswerButton} id="0">
             부정
           </Style.Choice>
         </Style.ChoiceContainer>
