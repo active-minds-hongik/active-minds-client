@@ -35,25 +35,19 @@ export const Question = styled.div`
   font-size: 20px;
 `;
 export const Choice = styled.button`
-  width: 200px;
-  height: 40px;
+  width: 150px;
+  height: 60px;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 20px;
 `;
 
-export const Img = styled.img`
-  background-color: #66c84e;
-  width: 300px;
-  height: 300px;
-  margin-top: 30px;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-`;
 
 export const ChoiceContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;

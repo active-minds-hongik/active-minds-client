@@ -7,6 +7,7 @@ import * as Style from '../css/GamePageStyle';
 import { baseURL } from '../api/client';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import ImageDisplay from '../components/GamePage/ImageDisplay';
 
 const FaceGamePage = () => {
   const navigate = useNavigate();
@@ -72,28 +73,30 @@ const FaceGamePage = () => {
         <Style.GameName>표정으로 감정 맞추기</Style.GameName>
         <Timer />
         <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
-        {/* <Style.Img src={questions[currentQuestion].pixels} /> */}
+        {questions.length > 0 && (
+          <ImageDisplay pixels={questions[currentQuestion].pixels} />
+        )}
         <Style.ChoiceContainer>
           <Style.Choice onClick={handelAnswerButton} id="0">
-            행복
-          </Style.Choice>
-          <Style.Choice onClick={handelAnswerButton} id="1">
-            슬픔
-          </Style.Choice>
-          <Style.Choice onClick={handelAnswerButton} id="2">
             화남
           </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="1">
+            역겨움
+          </Style.Choice>
+          <Style.Choice onClick={handelAnswerButton} id="2">
+            두려움
+          </Style.Choice>
           <Style.Choice onClick={handelAnswerButton} id="3">
-            무기력
+            기쁨
           </Style.Choice>
           <Style.Choice onClick={handelAnswerButton} id="4">
-            어쩌고
+            슬픔
           </Style.Choice>
           <Style.Choice onClick={handelAnswerButton} id="5">
-            저쩌고
+            놀람
           </Style.Choice>
           <Style.Choice onClick={handelAnswerButton} id="6">
-            어쩔저쩔
+            중립
           </Style.Choice>
         </Style.ChoiceContainer>
       </Style.FaceGameContainer>

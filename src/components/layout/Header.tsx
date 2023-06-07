@@ -6,7 +6,7 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <HeaderContainer>
-      <Logo onClick={() => navigate('/')}></Logo>
+      <Logo onClick={() => navigate('/')}>AM</Logo>
     </HeaderContainer>
   );
 };
@@ -21,7 +21,13 @@ const Logo = styled.div`
   width: 50px;
   height: 50px;
   margin-left: 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
   background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover{
     cursor: pointer;
   }
