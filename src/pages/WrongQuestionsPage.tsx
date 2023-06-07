@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { wrongQuestionState, questionState } from '../states';
 import { useRecoilState } from 'recoil';
 import { IQuestion, IWrongQuestion } from '../interfaces';
+import ImageDisplay from '../components/GamePage/ImageDisplay';
 
 const WrongQuestionsPage = () => {
   const navigate = useNavigate();
@@ -33,53 +34,53 @@ const WrongQuestionsPage = () => {
             let emotionText;
             switch (emotionNum) {
               case 0:
-                emotionText = '행복';
-                break;
-              case 1:
-                emotionText = '슬픔';
-                break;
-              case 2:
                 emotionText = '화남';
                 break;
+              case 1:
+                emotionText = '역겨움';
+                break;
+              case 2:
+                emotionText = '두려움';
+                break;
               case 3:
-                emotionText = '무기력';
+                emotionText = '기쁨';
                 break;
               case 4:
-                emotionText = '어쩌고';
+                emotionText = '슬픔';
                 break;
               case 5:
-                emotionText = '저쩌고';
+                emotionText = '놀람';
                 break;
               case 6:
-                emotionText = '어쩔저쩔';
+                emotionText = '중립';
                 break;
               default:
                 emotionText = '';
                 break;
             }
 
-             let userAnswerText;
+            let userAnswerText;
             switch (wrongQuestionItem.myAnswer) {
               case '0':
-                userAnswerText = '행복';
-                break;
-              case '1':
-                userAnswerText = '슬픔';
-                break;
-              case '2':
                 userAnswerText = '화남';
                 break;
+              case '1':
+                userAnswerText = '역겨움';
+                break;
+              case '2':
+                userAnswerText = '두려움';
+                break;
               case '3':
-                userAnswerText = '무기력';
+                userAnswerText = '기쁨';
                 break;
               case '4':
-                userAnswerText = '어쩌고';
+                userAnswerText = '슬픔';
                 break;
               case '5':
-                userAnswerText = '저쩌고';
+                userAnswerText = '놀람';
                 break;
               case '6':
-                userAnswerText = '어쩔저쩔';
+                userAnswerText = '중립';
                 break;
               default:
                 userAnswerText = '';
@@ -90,7 +91,9 @@ const WrongQuestionsPage = () => {
               <AnswerContainer key={id}>
                 {pixels ? (
                   <>
-                    <QuestionImg src={pixels} />
+                    <ImageContainer>
+                      <ImageDisplay pixels={pixels} />
+                    </ImageContainer>
                     <TextContainer>
                       <Answer>정답: {emotionText}</Answer>
                       <UserAnswer>내가 고른 답: {userAnswerText}</UserAnswer>
@@ -174,11 +177,12 @@ const AnswerContainer = styled.div`
   background-color: beige;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
 `;
 
-const QuestionImg = styled.img`
-  width: 130px;
-  height: 130px;
+const ImageContainer = styled.div`
+  width: 150px;
+  height: 150px;
   background-color: #66c84e;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
