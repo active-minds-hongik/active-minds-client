@@ -78,7 +78,15 @@ export const ProgressBarFiller = styled.div`
 `;
 
 export const QNum = styled.div`
-  font-size: 16px;
+  font-size: 23px;
   margin-left: auto;
   margin-right: 50px;
+  font-weight: 600;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 450px;
 `;

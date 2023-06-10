@@ -72,10 +72,11 @@ const FaceGamePage = () => {
       exit={{ opacity: 0 }}
     >
       <Style.FaceGameContainer>
-        <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+        <Style.Row>
+          <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+          <Timer />
+        </Style.Row>
         <Style.GameName>표정으로 감정 맞추기</Style.GameName>
-        <Timer />
-        <Style.Current>{currentQuestion + 1}번</Style.Current>
         <Style.QNum>{currentQuestion + 1}/10</Style.QNum>
         <Style.ProgressBarContainer>
           <Style.ProgressBarFiller
