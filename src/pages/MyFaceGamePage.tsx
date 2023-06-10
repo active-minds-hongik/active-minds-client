@@ -62,7 +62,7 @@ const MyFaceGamePage = () => {
     >
       <MyFaceGameContainer isOpened={isOpened}>
         <BackBtn onClick={() => navigate(-1)}>⬅</BackBtn>
-        <GameName>얼굴 입력-감정 매칭 게임</GameName>
+        <GameName>내 얼굴로 감정 맞추기</GameName>
         {imageSrc ? (
           <Img src={imageSrc} alt="uploadImg" onClick={handleInputBtn} />
         ) : (
@@ -104,7 +104,9 @@ const MyFaceGameContainer = styled.div<{ isOpened: boolean }>`
 const BackBtn = styled.div`
   width: 50px;
   height: 50px;
-  font-size: 20px;
+  font-size: 30px;
+  margin-top: 10px;
+  margin-left: 10px;
   margin-right: auto;
   color: black;
   display: flex;
@@ -120,6 +122,8 @@ const BackBtn = styled.div`
 
 const GameName = styled.div`
   font-size: 30px;
+  color: #4ab12f;
+  font-weight: 700;
 `;
 
 const ResultBtn = styled.button`
