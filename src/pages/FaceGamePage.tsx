@@ -39,7 +39,8 @@ const FaceGamePage = () => {
   const handelAnswerButton = (e: React.MouseEvent<HTMLElement>) => {
     if (
       //정답이면
-      Number((e.target as HTMLElement).id) === questions[currentQuestion].emotionNum
+      Number((e.target as HTMLElement).id) ===
+      questions[currentQuestion].emotionNum
     ) {
       setCurrentScore(currentScore + 1);
     } else {
@@ -62,6 +63,8 @@ const FaceGamePage = () => {
     }
   };
 
+  const progressPercentage = (currentQuestion / questions.length) * 100; // 진행 상황 백분율 계산
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -69,10 +72,17 @@ const FaceGamePage = () => {
       exit={{ opacity: 0 }}
     >
       <Style.FaceGameContainer>
-        <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+        <Style.Row>
+          <Style.BackBtn onClick={() => navigate(-1)}>⬅</Style.BackBtn>
+          <Timer />
+        </Style.Row>
         <Style.GameName>표정으로 감정 맞추기</Style.GameName>
-        <Timer />
-        <Style.Current>{currentQuestion + 1}번 문제</Style.Current>
+        <Style.QNum>{currentQuestion + 1}/10</Style.QNum>
+        <Style.ProgressBarContainer>
+          <Style.ProgressBarFiller
+            style={{ width: `${progressPercentage}%` }}
+          />
+        </Style.ProgressBarContainer>
         {questions.length > 0 && (
           <ImageDisplay pixels={questions[currentQuestion].pixels} />
         )}

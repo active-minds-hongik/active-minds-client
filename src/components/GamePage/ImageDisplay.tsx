@@ -9,12 +9,12 @@ const ImageDisplay = ({ pixels }: any) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const pixelValues = pixels.split(' ').map(Number);
+    const pixelValues = pixels && pixels.split(' ').map(Number);
 
     for (let i = 0; i < imageSize; i++) {
       for (let j = 0; j < imageSize; j++) {
         const pixelIndex = i * imageSize + j;
-        const pixelValue = pixelValues[pixelIndex];
+        const pixelValue = pixelValues && pixelValues[pixelIndex];
         context.fillStyle = `rgb(${pixelValue},${pixelValue},${pixelValue})`;
         context.fillRect(j, i, 1, 1);
       }
@@ -29,9 +29,10 @@ const ImageDisplay = ({ pixels }: any) => {
 };
 
 const Picture = styled.canvas`
-  width: 150px;
+  width: 160px;
   background-size: cover;
   border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 export default ImageDisplay;

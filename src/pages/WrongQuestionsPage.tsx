@@ -100,14 +100,16 @@ const WrongQuestionsPage = () => {
                     </TextContainer>
                   </>
                 ) : (
-                  <TextContainer>
+                  <Column>
                     <QuestionText>{document}</QuestionText>
-                    <Answer>정답: {label === '0' ? '부정' : '긍정'}</Answer>
-                    <UserAnswer>
-                      내가 고른 답:{' '}
-                      {wrongQuestionItem.myAnswer === '0' ? '부정' : '긍정'}
-                    </UserAnswer>
-                  </TextContainer>
+                    <TextContainer>
+                      <Answer>정답: {label === '0' ? '부정' : '긍정'}</Answer>
+                      <UserAnswer>
+                        내가 고른 답:{' '}
+                        {wrongQuestionItem.myAnswer === '0' ? '부정' : '긍정'}
+                      </UserAnswer>
+                    </TextContainer>
+                  </Column>
                 )}
               </AnswerContainer>
             );
@@ -172,7 +174,6 @@ const AnswerContainer = styled.div`
   height: 200px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   margin: 10px 0px;
   background-color: beige;
   border-radius: 20px;
@@ -186,15 +187,23 @@ const ImageContainer = styled.div`
   background-color: #66c84e;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-right: 20px;
 `;
 
 const QuestionText = styled.div`
   font-size: 16px;
   margin-bottom: 10px;
+  width: 360px;
   background-color: #66c84e;
   border-radius: 8px;
   padding: 10px;
   font-weight: 700;
+  word-break: keep-all;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export default WrongQuestionsPage;
