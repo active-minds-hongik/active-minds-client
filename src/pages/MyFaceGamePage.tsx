@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import fileupload from '../img/fileupload.png';
 import { BsFillCameraFill } from 'react-icons/bs';
 import { useRecoilState } from 'recoil';
-import { modalState, CapturedImgState } from '../states';
+import { modalState, CapturedImgState, emotionState } from '../states';
 import CameraModal from '../components/GamePage/CameraModal';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { baseURL } from '../api/client';
+import { uploadImage } from '../api/upload';
 
 const MyFaceGamePage = () => {
   const fileInput = React.useRef(null);
   const [imageSrc, setImageSrc] = useRecoilState<any>(CapturedImgState);
   const [isOpened, setIsOpened] = useRecoilState<boolean>(modalState);
+  const [emotion, setEmotion] = useRecoilState<any>(emotionState);
   const navigate = useNavigate();
   const handleInputBtn = (e: React.MouseEvent<HTMLElement>) => {
     fileInput.current.click();
@@ -48,8 +52,18 @@ const MyFaceGamePage = () => {
   const handleResultBtn = () => {
     //api 연결
     if (imageSrc) {
+      const formData = new FormData();
+      formData.append('image', imageSrc);
+      console.log(formData);
+      const result = uploadImage(formData);
+
+      // if (result) {
+      console.log(result);
+
+      setEmotion(result);
       navigate('/result2');
       setImageSrc(null);
+      // }
     } // 사진 입력, 전송되었을 때만
     else alert('사진을 첨부하세요.');
   };

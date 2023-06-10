@@ -2,18 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
+import { emotionState } from '../states';
 
 const Result2Page = () => {
   const navigate = useNavigate();
+  const emotion = useRecoilValue<string>(emotionState);
 
   return (
     <Container>
       <Header />
       <GameName>감정 매칭 게임 결과</GameName>
       <Answer>AI가 예측한 감정은</Answer>
-      <AnswerText>기쁨</AnswerText>
-      <Answer>입니다</Answer>
+      <AnswerText>{emotion}</AnswerText>
+      <Answer>입니다!</Answer>
 
       <BtnContainer>
         <GoHomeBtn onClick={() => navigate('/')}>홈으로 돌아가기</GoHomeBtn>
@@ -38,6 +40,7 @@ const GameName = styled.div`
 const Answer = styled.div`
   font-size: 30px;
   margin-top: 10px;
+  text-align: center;
 `;
 
 const AnswerText = styled(Answer)`
