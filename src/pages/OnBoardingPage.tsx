@@ -21,16 +21,10 @@ const OnBoardingPage = () => {
   return (
     <Container>
       <Header />
+      <Title>Active Minds</Title>
       <ServiceText>
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 소개
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 소개
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 소개
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 서비스 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개 서비스
-        서비스 소개 서비스 소개 서비스 소개 서비스 소개서비스 소개 소개서비스
-        소개 소개서비스 소개
+        이 게임을 통해 표정을 인식하고 해석하는 능력과 언어 능력을 발전시켜
+        일상생활에서 더욱 원활하게 의사소통할 수 있습니다.
       </ServiceText>
       <GameContainer>
         <GameStartButton onClick={() => navigate('/face-game')}>
@@ -39,7 +33,7 @@ const OnBoardingPage = () => {
         </GameStartButton>
         <GameStartButton onClick={() => navigate('/text-game')}>
           <GoTextSize size={40} />
-          &nbsp;&nbsp;텍스트로 감정 맞추기
+          &nbsp;&nbsp;문장 읽고 감정 맞추기
         </GameStartButton>
         <GameStartButton onClick={() => navigate('/myface-game')}>
           <BsFillCameraFill size={40} />
@@ -78,6 +72,13 @@ const GameStartButton = styled.button`
 
 const ServiceText = styled.div`
   margin: 40px;
+`;
+
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 30px;
 `;
 
 export default OnBoardingPage;
