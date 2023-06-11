@@ -21,10 +21,9 @@ const Logo = styled.div`
   width: 50px;
   height: 50px;
   margin-left: 20px;
-  color: white;
-  font-size: 20px;
+  color: green;
+  font-size: 23px;
   font-weight: 700;
-  background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -69,12 +69,14 @@ const MyFaceGamePage = () => {
           <Img src={fileupload} alt="uploadImg" onClick={handleInputBtn} />
         )}
         <CameraBtn
-          size={50}
           onClick={() => {
             setIsOpened(!isOpened);
             setImageSrc(null);
           }}
-        />
+        >
+          <CameraIcon size={50} />
+          사진 찍기
+        </CameraBtn>
         <ResultBtn onClick={handleResultBtn}>결과 보기</ResultBtn>
         <input
           type="file"
@@ -145,7 +147,20 @@ const Img = styled.img`
   background-color: white;
 `;
 
-const CameraBtn = styled(BsFillCameraFill)``;
+const CameraIcon = styled(BsFillCameraFill)`
+  margin-right: 10px;
+`;
+
+const CameraBtn = styled.button`
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 10px;
+  width: 200px;
+  margin-top: 20px;
+`;
 
 const ModalContainer = styled.div`
   width: 85%;
