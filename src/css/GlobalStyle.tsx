@@ -1,8 +1,23 @@
 import { createGlobalStyle } from 'styled-components';
+import WelcomeFont from '../fonts/welcomefontregular.ttf';
+import GmarketSansTTFMedium from '../fonts/GmarketSansTTFMedium.ttf';
+
 
 export const GlobalStyle = createGlobalStyle`
 * {
     box-sizing: border-box;
+    font-family: GmarketSansTTFMediumFont;
+  }
+
+  @font-face {
+        font-family: 'WelcomeFont';
+        font-style: normal;
+        src: url(${WelcomeFont}) format('truetype');
+  }
+  @font-face {
+        font-family: 'GmarketSansTTFMediumFont';
+        font-style: normal;
+        src: url(${GmarketSansTTFMedium}) format('truetype');
   }
 
   body {

@@ -29,7 +29,7 @@ const ImageDisplay = ({ pixels }: any) => {
 };
 
 const Picture = styled.canvas`
-  width: 160px;
+  width: 150px;
   background-size: cover;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

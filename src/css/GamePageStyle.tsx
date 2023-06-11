@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const FaceGameContainer = styled.div`
   width: 450px;
   height: 100vh;
