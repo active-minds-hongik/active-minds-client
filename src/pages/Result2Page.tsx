@@ -11,7 +11,10 @@ const Result2Page = () => {
     <Container>
       <Header />
       <GameName>감정 매칭 게임 결과</GameName>
-      <Answer>내가 예측한 표정 정확도: 80%</Answer>
+      <Answer>AI가 예측한 감정은</Answer>
+      <AnswerText>기쁨</AnswerText>
+      <Answer>입니다</Answer>
+
       <BtnContainer>
         <GoHomeBtn onClick={() => navigate('/')}>홈으로 돌아가기</GoHomeBtn>
       </BtnContainer>
@@ -36,6 +39,12 @@ const Answer = styled.div`
   font-size: 30px;
   margin-top: 10px;
 `;
+
+const AnswerText = styled(Answer)`
+  color: blue;
+  font-weight: 700;
+`;
+
 const GoHomeBtn = styled.button`
   width: 260px;
   height: 50px;
