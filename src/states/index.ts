@@ -25,3 +25,8 @@ export const questionState = atom<IQuestion[]>({
   key: 'question',
   default: [],
 });
+
+export const emotionState = atom<string>({
+  key: 'emotion',
+  default: '',
+});
