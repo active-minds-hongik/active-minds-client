@@ -49,23 +49,30 @@ const MyFaceGamePage = () => {
     });
   };
 
-  const handleResultBtn = () => {
-    //api 연결
+  const handleResultBtn = async () => {
     if (imageSrc) {
       const formData = new FormData();
       formData.append('image', imageSrc);
-      console.log(formData);
-      const result = uploadImage(formData);
 
-      // if (result) {
-      console.log(result);
+      try {
+        const result: any = await uploadImage(formData);
 
-      setEmotion(result);
-      navigate('/result2');
-      setImageSrc(null);
-      // }
-    } // 사진 입력, 전송되었을 때만
-    else alert('사진을 첨부하세요.');
+        if (
+          result ==
+          'Face could not be detected. Please confirm that the picture is a face photo or consider to set enforce_detection param to False.'
+        ) {
+          alert('얼굴이 잘 보이게 사진을 다시 촬영해주세요.');
+          window.location.reload();
+        } else {
+          setEmotion(result);
+          navigate('/result2');
+        }
+      } catch (error) {
+        console.log('Error uploading image:', error);
+      }
+    } else {
+      alert('사진을 첨부하세요.');
+    }
   };
 
   return (
