@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { useRecoilState } from 'recoil';
-import { scoreState, wrongQuestionState } from '../states';
+import { scoreState, wrongQuestionState, CapturedImgState } from '../states';
 import { RxFace } from 'react-icons/rx';
 import { GoTextSize } from 'react-icons/go';
 import { BsFillCameraFill } from 'react-icons/bs';
@@ -12,10 +12,12 @@ const OnBoardingPage = () => {
   const navigate = useNavigate();
   const [, setCurrentScore] = useRecoilState(scoreState);
   const [, setWrongQuestion] = useRecoilState(wrongQuestionState);
+  const [, setImageSrc] = useRecoilState<any>(CapturedImgState);
 
   useEffect(() => {
     setCurrentScore(0);
     setWrongQuestion([]);
+    setImageSrc(null);
   }, []);
 
   return (
