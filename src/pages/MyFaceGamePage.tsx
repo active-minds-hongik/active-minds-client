@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import fileupload from '../img/fileupload.png';
 import { BsFillCameraFill } from 'react-icons/bs';
 import { useRecoilState } from 'recoil';
-import { modalState, CapturedImgState } from '../states';
+import { modalState, CapturedImgState, emotionState } from '../states';
 import CameraModal from '../components/GamePage/CameraModal';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { baseURL } from '../api/client';
+import { uploadImage } from '../api/upload';
 
 const MyFaceGamePage = () => {
   const fileInput = React.useRef(null);
   const [imageSrc, setImageSrc] = useRecoilState<any>(CapturedImgState);
   const [isOpened, setIsOpened] = useRecoilState<boolean>(modalState);
+  const [emotion, setEmotion] = useRecoilState<any>(emotionState);
   const navigate = useNavigate();
   const handleInputBtn = (e: React.MouseEvent<HTMLElement>) => {
     fileInput.current.click();
@@ -45,13 +49,30 @@ const MyFaceGamePage = () => {
     });
   };
 
-  const handleResultBtn = () => {
-    //api 연결
+  const handleResultBtn = async () => {
     if (imageSrc) {
-      navigate('/result2');
-      setImageSrc(null);
-    } // 사진 입력, 전송되었을 때만
-    else alert('사진을 첨부하세요.');
+      const formData = new FormData();
+      formData.append('image', imageSrc);
+
+      try {
+        const result: any = await uploadImage(formData);
+
+        if (
+          result ==
+          'Face could not be detected. Please confirm that the picture is a face photo or consider to set enforce_detection param to False.'
+        ) {
+          alert('얼굴이 잘 보이게 사진을 다시 촬영해주세요.');
+          window.location.reload();
+        } else {
+          setEmotion(result);
+          navigate('/result2');
+        }
+      } catch (error) {
+        console.log('Error uploading image:', error);
+      }
+    } else {
+      alert('사진을 첨부하세요.');
+    }
   };
 
   return (
