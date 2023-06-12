@@ -53,6 +53,7 @@ const MyFaceGamePage = () => {
     if (imageSrc) {
       const formData = new FormData();
       formData.append('image', imageSrc);
+<<<<<<< HEAD
 
       try {
         const result: any = await uploadImage(formData);
@@ -73,6 +74,20 @@ const MyFaceGamePage = () => {
     } else {
       alert('사진을 첨부하세요.');
     }
+=======
+      console.log(formData);
+      const result = uploadImage(formData);
+
+      // if (result) {
+      console.log(result);
+
+      setEmotion(result);
+      navigate('/result2');
+      setImageSrc(null);
+      // }
+    } // 사진 입력, 전송되었을 때만
+    else alert('사진을 첨부하세요.');
+>>>>>>> 18a0abd (Resolve Conflicts)
   };
 
   return (
